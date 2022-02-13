@@ -1,4 +1,4 @@
-from conf.flaskConfig import Config
+from conf.flaskConfig import Config, CONFIG
 from flask import Flask, jsonify
 from flask_restful import Api
 from src.models.user import User
@@ -27,4 +27,4 @@ def create_tables():
     db.create_all()
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host=CONFIG.get('host'), port=CONFIG.get('port'))
