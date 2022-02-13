@@ -1,0 +1,13 @@
+{
+	"host": "127.0.0.1",
+
+	"database": {
+
+		"mysql": true,
+		"username": "ArvanTestUser",
+		"password": "ArvanCloudPassword",
+		"server": "localhost",
+		"name": "phonebook"
+		
+	}
+}
