@@ -1,7 +1,8 @@
-from conf.config import Config
+from conf.flaskConfig import Config
 from flask import Flask, jsonify
 from flask_restful import Api
 from src.models.user import User
+
 from db import db
 
 # Construct the core application.
