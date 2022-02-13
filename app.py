@@ -1,7 +1,8 @@
 from conf.flaskConfig import Config, CONFIG
 from flask import Flask, jsonify
 from flask_restful import Api
-from src.models.user import User
+from models.User import User
+from business.Select import Select
 
 from db import db
 
@@ -15,13 +16,13 @@ app.config.from_object(Config)
 
 db.init_app(app)
 
-@app.route('/')
-def index():
-    return jsonify("Just For Check :) ")
-
+# Routes
+api.add_resource(
+    Select, '/<string:username>'
+)
 
 @app.before_first_request
-def create_tables():
+def create_tables() -> None :
     """ To create/use the database mentioned in the URI, run this function. """ 
     User.__table__
     db.create_all()
