@@ -4,7 +4,8 @@
 	"routes":{
 		"user":{
 			
-			"select":"/<string:username>"
+			"select":"/<string:username>",
+			"insert":"/"
 		}
 	},
 	"database": {
