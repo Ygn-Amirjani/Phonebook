@@ -4,7 +4,13 @@ from models.User import User
 
 class Select(Resource) :
     def get(self, username):
-        user = User.query.filter_by(username=username).first()
-        User_found = {'Username': user.username, 'Phonenumber': user.phoneNumber}
+        """ Return all users who have this name  """
+
+        User_found = dict()
+        for i in range(len(User.query.filter_by(username=username).all())):
+            #  We used 'for' because there may be several users with the same name 
+            user = User.query.filter_by(username=username).all()[i]
+            #  append users to this dictionary
+            User_found.update({f'{i}-{user.username}': user.phoneNumber})
 
         return jsonify(User_found)
