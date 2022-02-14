@@ -3,6 +3,7 @@ from flask import Flask
 from flask_restful import Api
 from models.User import User
 from business.Select import Select
+from business.Insert import Insert
 
 from db import db
 
@@ -20,6 +21,10 @@ db.init_app(app)
 api.add_resource(
     Select, 
     CONFIG.get('routes', {}).get('user', {}).get('select')
+)
+api.add_resource(
+    Insert,
+    CONFIG.get('routes', {}).get('user', {}).get('insert')
 )
 
 @app.before_first_request
