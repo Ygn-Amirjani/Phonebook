@@ -1,5 +1,5 @@
 from conf.flaskConfig import Config, CONFIG
-from flask import Flask, jsonify
+from flask import Flask
 from flask_restful import Api
 from models.User import User
 from business.Select import Select
@@ -18,7 +18,8 @@ db.init_app(app)
 
 # Routes
 api.add_resource(
-    Select, '/<string:username>'
+    Select, 
+    CONFIG.get('routes', {}).get('user', {}).get('select')
 )
 
 @app.before_first_request
