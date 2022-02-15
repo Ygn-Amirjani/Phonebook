@@ -5,6 +5,7 @@ from models.User import User
 from business.Select import Select
 from business.Insert import Insert
 from business.Delete import Delete
+from business.Update import Update
 
 from db import db
 
@@ -30,6 +31,10 @@ api.add_resource(
 api.add_resource(
     Delete,
     CONFIG.get('routes', {}).get('user', {}).get('insert_delete')
+)
+api.add_resource(
+    Update,
+    CONFIG.get('routes', {}).get('user', {}).get('update')
 )
 
 @app.before_first_request
