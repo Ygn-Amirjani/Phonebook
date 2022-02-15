@@ -1,4 +1,3 @@
-from email import message
 from flask import jsonify
 from flask_restful import Resource, abort
 from models.User import User
