@@ -20,7 +20,7 @@ class Delete(Resource):
         phoneNumber = args['phoneNumber']
         username = args['username']
 
-        # When the desired user was not found 
+        # When the program fails 
         self.abort_if_phonenumber_doesnt_exist(phoneNumber, username)
 
         # remove the information in the database 
@@ -32,7 +32,13 @@ class Delete(Resource):
 
     def abort_if_phonenumber_doesnt_exist(self, phoneNumber, username):
         """ The flask abort method either accepts an error code or it can accept a Response object. """
-        
-        if len(User.query.filter_by(phoneNumber=phoneNumber).all()) == 0 or \
-           len(User.query.filter_by(username=username).all()) == 0 :
-            abort(404,message="There is no user with this phone number or username in this database ... ")
+
+        # There is no such phone number in the table at all 
+        if len(User.query.filter_by(phoneNumber=phoneNumber).all()) == 0 :
+            abort(404,message="There is no user with this phone number in this database ... ")
+        # There is no such username in the table at all 
+        elif len(User.query.filter_by(username=username).all()) == 0:
+            abort(404,message="There is no user with this username in this database ... ")
+        # When there is a phone number and username but they are not related
+        elif User.query.filter_by(phoneNumber=phoneNumber).first().username != username :
+            abort(404,message="Username and phone number are different ... ")
