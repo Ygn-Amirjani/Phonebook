@@ -5,7 +5,8 @@
 		"user":{
 			
 			"select":"/<string:username>",
-			"insert_delete":"/"
+			"insert_delete":"/",
+			"update":"/<string:phoneNumber>"
 		}
 	},
 	"database": {
