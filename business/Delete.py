@@ -32,5 +32,7 @@ class Delete(Resource):
 
     def abort_if_phonenumber_doesnt_exist(self, phoneNumber, username):
         """ The flask abort method either accepts an error code or it can accept a Response object. """
-        if len(User.query.filter_by(phoneNumber=phoneNumber).all()) == 0 or len(User.query.filter_by(username=username).all()) == 0 :
+        
+        if len(User.query.filter_by(phoneNumber=phoneNumber).all()) == 0 or \
+           len(User.query.filter_by(username=username).all()) == 0 :
             abort(404,message="There is no user with this phone number or username in this database ... ")
