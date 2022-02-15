@@ -4,6 +4,7 @@ from flask_restful import Api
 from models.User import User
 from business.Select import Select
 from business.Insert import Insert
+from business.Delete import Delete
 
 from db import db
 
@@ -24,7 +25,11 @@ api.add_resource(
 )
 api.add_resource(
     Insert,
-    CONFIG.get('routes', {}).get('user', {}).get('insert')
+    CONFIG.get('routes', {}).get('user', {}).get('insert_delete')
+)
+api.add_resource(
+    Delete,
+    CONFIG.get('routes', {}).get('user', {}).get('insert_delete')
 )
 
 @app.before_first_request
