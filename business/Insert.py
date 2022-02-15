@@ -33,5 +33,7 @@ class Insert(Resource):
 
     def abort_if_username_exist(self, phoneNumber):
         """ The flask abort method either accepts an error code or it can accept a Response object. """
+
+        # This condition applies when the given phone number is in the table  
         if len(User.query.filter_by(phoneNumber=phoneNumber).all()) >= 1:
             abort(404,message="There is a user with this phone number in this database ...")
