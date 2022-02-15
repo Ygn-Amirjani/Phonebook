@@ -1,6 +1,5 @@
 from flask import jsonify
 from flask_restful import Resource, reqparse, abort
-from sqlalchemy import null
 from models.User import User
 
 from db import db
@@ -29,7 +28,7 @@ class Insert(Resource):
         user = User(phoneNumber=phoneNumber, username=username)
         db.session.add(user)
         db.session.commit()
-        
+
         return jsonify({"Added New User": username})
 
     def abort_if_username_exist(self, phoneNumber):
