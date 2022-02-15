@@ -29,10 +29,10 @@ class Insert(Resource):
         user = User(phoneNumber=phoneNumber, username=username)
         db.session.add(user)
         db.session.commit()
-
+        
         return jsonify({"Added New User": username})
 
     def abort_if_username_exist(self, phoneNumber):
         """ The flask abort method either accepts an error code or it can accept a Response object. """
-        if User.query.filter_by(phoneNumber=phoneNumber).first() is not null:
+        if len(User.query.filter_by(phoneNumber=phoneNumber).all()) >= 1:
             abort(404,message="There is a user with this phone number in this database ...")
