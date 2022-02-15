@@ -15,11 +15,13 @@ class Select(Resource) :
 
         # When there is no user, our dictionary does not hold any value. 
         self.abort_if_username_doesnt_exist(user_found=user_found)
-        
+
         return jsonify(user_found)
 
     def abort_if_username_doesnt_exist(self, user_found):
         """ The flask abort method either accepts an error code or it can accept a Response object. """
+
+        # This condition is enforced when the given username does not exist in the table 
         if  len(user_found) == 0 :
             abort(404,message="User Not Fount ...")
 
