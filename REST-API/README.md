@@ -4,7 +4,7 @@ In this project, we tried to make a phone book with ‍‍‍‍‍‍‍`‍Res
 
 You can save your contacts, change the contact number you want, delete that contact, and return number if needed .
 
-We also use Swagger to document Api for convenience .
+We also use Swagger to document Api for convenience And that's it :) now you can open http://localhost:8000/apidocs to see available APIs.
 
 ### Development Environment (Without Docker)
 
