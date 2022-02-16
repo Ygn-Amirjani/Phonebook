@@ -2,7 +2,7 @@
 import json
 
 # Load config file
-with open('/home/yegane/Phonebook/conf/config.json', mode='r') as config_file:
+with open('/home/yegane/Phonebook/REST-API/conf/config.json', mode='r') as config_file:
     CONFIG = json.load(config_file)
 
 # Database connection
