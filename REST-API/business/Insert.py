@@ -1,5 +1,5 @@
-from flask import jsonify
-from flask_restful import Resource, reqparse, abort
+from flask import jsonify, make_response
+from flask_restful import Resource, reqparse
 from models.User import User
 
 from db import db
@@ -20,20 +20,20 @@ class Insert(Resource):
         phoneNumber = args['phoneNumber']
         username = args['username']
 
-        # The phone number is a unique value and
-        # it is not possible to store a phone number in the database for 2 different users
-        self.abort_if_username_exist(phoneNumber=phoneNumber)
-
-        # Write and save the information in the database 
-        user = User(phoneNumber=phoneNumber, username=username)
-        db.session.add(user)
-        db.session.commit()
-
-        return jsonify({"Added New User": username})
-
-    def abort_if_username_exist(self, phoneNumber):
-        """ The flask abort method either accepts an error code or it can accept a Response object. """
-
-        # This condition applies when the given phone number is in the table  
+        message = ""
+        # This condition is enforced when the given username does not exist in the table
         if len(User.query.filter_by(phoneNumber=phoneNumber).all()) >= 1:
-            abort(404,message="There is a user with this phone number in this database ...")
+            message = make_response(
+                jsonify(msg="There is a user with this phone number in this database ..."), 403
+            )
+        else:
+            # Write and save the information in the database 
+            user = User(phoneNumber=phoneNumber, username=username)
+            db.session.add(user)
+            db.session.commit()
+
+            message = make_response(
+                jsonify(msg="Added New User"), 200
+            )
+
+        return message

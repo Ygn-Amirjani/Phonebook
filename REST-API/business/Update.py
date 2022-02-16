@@ -1,5 +1,5 @@
-from flask import jsonify
-from flask_restful import Resource, reqparse, abort
+from flask import jsonify, make_response
+from flask_restful import Resource, reqparse
 from models.User import User
 
 from db import db
@@ -19,31 +19,38 @@ class Update(Resource):
         id = args['id']
         username = args['username']
 
-        # When the program fails 
-        self.abort_if_user_doesnt_exist(id,phoneNumber, username)
-
-        # update the information in the database 
-        user = User.query.filter_by(id=id, username=username).first()
-        user.phoneNumber = phoneNumber
-        db.session.commit()
-
-        return jsonify({"Your phone number changed to this ": phoneNumber})
-
-    def abort_if_user_doesnt_exist(self,id,phoneNumber, username):
-        """ The flask abort method either accepts an error code or it can accept a Response object. """
-
+        message = ""
         # There is no such ID in the table at all 
         if len(User.query.filter_by(id=id).all()) == 0:
-            abort(404, message="There is no user with this ID in this database ...")
+            message = make_response(
+                jsonify(msg="There is no user with this ID in this database ..."), 404
+            )
         # There is no such Username in the table at all 
         elif len(User.query.filter_by(username=username).all()) == 0:
-            abort(404, message="There is no user with this Username in this database ...")
+            message = make_response(
+                jsonify(msg="There is no user with this Username in this database ..."), 404
+            )
         # When there is a ID and username but they are not related
         elif User.query.filter_by(id=id).first().username != username :
-            abort(404,message="Username and ID are different ... ")
+            message = make_response(
+                jsonify(msg="Username and ID are different ... "), 400
+            )
         # This condition applies when the given phone number is in the table
         elif len(User.query.filter_by(phoneNumber=phoneNumber).all()) >= 1:
-            abort(404, message="here is a user with this phone number in this database ...")
+            message = make_response(
+                jsonify(msg="here is a user with this phone number in this database .."), 403
+            )
+        else :
+            # update the information in the database 
+            user = User.query.filter_by(id=id, username=username).first()
+            user.phoneNumber = phoneNumber
+            db.session.commit()
+            
+            message = make_response(
+                jsonify(msg="phone number changed"), 200
+            )
+
+        return message
 
 
 
