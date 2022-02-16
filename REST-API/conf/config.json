@@ -1,0 +1,21 @@
+{
+	"host": "127.0.0.1",
+	"port": "8000",
+	"routes":{
+		"user":{
+			
+			"select":"/<string:username>",
+			"insert_delete":"/",
+			"update":"/<string:phoneNumber>"
+		}
+	},
+	"database": {
+
+		"mysql": true,
+		"username": "ArvanTestUser",
+		"password": "ArvanCloudPassword",
+		"server": "localhost",
+		"name": "phonebook"
+		
+	}
+}
