@@ -4,9 +4,10 @@
 	"routes":{
 		"user":{
 			
-			"select":"/<string:username>",
-			"insert_delete":"/",
-			"update":"/<string:phoneNumber>"
+			"select":"/user/select/<string:username>",
+			"insert":"/user/insert",
+			"delete":"/user/delete",
+			"update":"/user/update/<string:phoneNumber>"
 		}
 	},
 	"database": {
