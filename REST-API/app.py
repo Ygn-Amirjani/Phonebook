@@ -41,7 +41,6 @@ api.add_resource(
     CONFIG.get('routes', {}).get('user', {}).get('update')
 )
 
-
 @app.before_first_request
 def create_tables() -> None :
     """ To create/use the database mentioned in the URI, run this function. """ 
