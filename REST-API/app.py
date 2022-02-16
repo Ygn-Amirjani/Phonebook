@@ -1,7 +1,9 @@
-from conf.flaskConfig import Config, CONFIG
 from flask import Flask
 from flask_restful import Api
+from flasgger import Swagger
+
 from models.User import User
+from conf.flaskConfig import Config, CONFIG
 from business.Select import Select
 from business.Insert import Insert
 from business.Delete import Delete
@@ -12,6 +14,7 @@ from db import db
 # Construct the core application.
 app = Flask(__name__)
 api = Api(app)
+swagger = Swagger(app)
 
 # configuration
 app.debug = True
@@ -26,11 +29,11 @@ api.add_resource(
 )
 api.add_resource(
     Insert,
-    CONFIG.get('routes', {}).get('user', {}).get('insert_delete')
+    CONFIG.get('routes', {}).get('user', {}).get('insert')
 )
 api.add_resource(
     Delete,
-    CONFIG.get('routes', {}).get('user', {}).get('insert_delete')
+    CONFIG.get('routes', {}).get('user', {}).get('delete')
 )
 api.add_resource(
     Update,
