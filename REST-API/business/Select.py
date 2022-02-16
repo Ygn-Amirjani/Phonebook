@@ -1,8 +1,11 @@
 from flask import jsonify, make_response
 from flask_restful import Resource
+from flasgger import swag_from
+
 from models.User import User
 
 class Select(Resource) :
+    @swag_from('../yml/select.yml')
     def get(self, username):
         """ Return all users who have this name  """
 
@@ -20,9 +23,11 @@ class Select(Resource) :
                 jsonify(msg="There is no user with this name ..."), 400
             )
         else:
-            message = make_response(
-                jsonify(user_found), 200
-            )
+                message = make_response(
+                    jsonify(user_found), 200
+                )
 
+
+        print(type(message))
         return message
 

@@ -1,7 +1,8 @@
 from flask import jsonify, make_response
 from flask_restful import Resource, reqparse
-from models.User import User
+from flasgger import swag_from
 
+from models.User import User
 from db import db
 
 # Update API request parser
@@ -10,6 +11,7 @@ parser.add_argument('id', type=int, required=True)
 parser.add_argument('username', type=str, required=True)
 
 class Update(Resource):
+    @swag_from('../yml/update.yml')
     def patch(self, phoneNumber):
 
         # Get new user information

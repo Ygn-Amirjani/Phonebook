@@ -1,0 +1,78 @@
+Give a new phone number and change the user's phone number with the ID and username
+---
+tags: 
+  - name: "User"
+parameters:
+  - name: phoneNumber
+    in: path
+    required: true
+    type: "string"
+    format: "string"
+  - name: body
+    in: body
+    required: true
+    schema:
+    required:
+      - id
+      - username
+    properties:
+      id:
+        type: int
+        description: "Because the ID is primary key"
+      username:
+        type: string
+        description: Your name
+    example:
+      id: 1
+      username: "Yegane"
+responses:
+  "200":
+    description: "User updated Successfully"
+    schema:
+      type: object
+      properties:
+        msg:
+          type: "string"
+          format: "string"
+          description: phone number changed
+      example:
+        msg: "phone number changed"
+  "403":
+    description: "When there is another user with this number"
+    schema:
+      type: object
+      properties:
+        msg:
+          type: "string"
+          format: "string"
+          description: here is a user with this phone number in this database 
+      example:
+        msg: "here is a user with this phone number in this database ..." 
+  "400":
+    description: "User could not be updated because the information entered is different"
+    schema:
+      type: object
+      properties:
+        msg:
+          type: "string"
+          format: "string"
+          description: Username and ID are different
+      example:
+        msg: "Username and ID are different ..." 
+  "404":
+    description: "The user was not updated because there is no such ID or username at all "
+    schema:
+      type: object
+      properties:
+        msg-one:
+          type: "string"
+          format: "string"
+          description: There is no user with this Username in this database
+        msg-two:
+          type: "string"
+          format: "string"
+          description: There is no user with this ID in this database
+      example:
+        msg-one: "There is no user with this Username in this database ..."
+        msg-two: "There is no user with this ID in this database ..."
+ 

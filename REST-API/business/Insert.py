@@ -1,7 +1,8 @@
 from flask import jsonify, make_response
 from flask_restful import Resource, reqparse
-from models.User import User
+from flasgger import swag_from
 
+from models.User import User
 from db import db
 
 # Insert API request parser
@@ -10,6 +11,7 @@ parser.add_argument('phoneNumber', type=str, required=True)
 parser.add_argument('username', type=str, required=True)
 
 class Insert(Resource):
+    @swag_from('../yml/insert.yml')
     def post(self):
         """ Use POST when you want to add a child resource under resources collection."""
 
@@ -33,7 +35,7 @@ class Insert(Resource):
             db.session.commit()
 
             message = make_response(
-                jsonify(msg="Added New User"), 200
+                jsonify(id=user.id,msg="Added New User"), 200
             )
 
         return message

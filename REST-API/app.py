@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restful import Api
 from flasgger import Swagger
 
+from swaggerTemplate import template
 from models.User import User
 from conf.flaskConfig import Config, CONFIG
 from business.Select import Select
@@ -14,7 +15,7 @@ from db import db
 # Construct the core application.
 app = Flask(__name__)
 api = Api(app)
-swagger = Swagger(app)
+swagger = Swagger(app, template=template)
 
 # configuration
 app.debug = True
@@ -39,6 +40,7 @@ api.add_resource(
     Update,
     CONFIG.get('routes', {}).get('user', {}).get('update')
 )
+
 
 @app.before_first_request
 def create_tables() -> None :

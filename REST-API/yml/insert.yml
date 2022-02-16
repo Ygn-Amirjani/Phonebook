@@ -1,0 +1,51 @@
+Add new user with a phone number and username
+---
+tags: 
+  - name: "User"
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+    required:
+      - phoneNumber
+      - username
+    properties:
+      phoneNumber:
+        type: string
+        description: "The phone number is unique and should not be duplicated."
+      username:
+        type: string
+        description: Your name
+    example:
+      phoneNumber: "989124128795"
+      username: "Yegane"
+responses:
+  "200":
+    description: "User Added Successfully"
+    schema:
+      type: object
+      properties:
+        id:
+          type: "int"
+          format: "int"
+          description: id of created user
+        msg:
+          type: "string"
+          format: "string"
+          description: Added New User
+      example:
+        id: 1
+        msg: "Added New User"
+  "403":
+    description: "User not added because the phone number is duplicate "
+    schema:
+      type: object
+      properties:
+        msg:
+          type: "string"
+          format: "string"
+          description: There is a user with this phone number in this database
+      example:
+        msg: "There is a user with this phone number in this database ..."
+  

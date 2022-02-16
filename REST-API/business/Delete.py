@@ -1,7 +1,8 @@
 from flask import jsonify, make_response
 from flask_restful import Resource, reqparse
-from models.User import User
+from flasgger import swag_from
 
+from models.User import User
 from db import db
 
 # Delete API request parser
@@ -10,6 +11,7 @@ parser.add_argument('phoneNumber', type=str, required=True)
 parser.add_argument('username', type=str, required=True)
 
 class Delete(Resource):
+    @swag_from('../yml/delete.yml')
     def delete(self):
         """ Use DELETE when you want to remove a child resource from the resource collection. """
 

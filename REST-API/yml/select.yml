@@ -1,0 +1,34 @@
+Find user's phone number by username
+---
+tags:
+  - name: "User"
+parameters:
+  - name: username
+    in: path
+    required: true
+    type: "string"
+    format: "string"
+responses:
+  "200":
+    description: "This user exists"
+    schema:
+      type: object
+      properties:
+        username:
+          type: "flask.wrappers.Response"
+          format: "flask.wrappers.Response"
+          description: Return this user's phone number 
+      example:
+        username: "989124128795"
+  "400":
+    description: "This user does not exist"
+    schema:
+      type: object
+      properties:
+        msg:
+          type: "string"
+          format: "string"
+          description: There is no user with this name
+      example:
+        id: 1
+        msg: "There is no user with this name ..."
