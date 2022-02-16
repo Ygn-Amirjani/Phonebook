@@ -29,7 +29,7 @@ cd REST-API
 python app.py
 ```
 
-##### Database Connection
+### Database Connection
 
 This project supports `MySql` as its database. 
 
