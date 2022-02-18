@@ -2,7 +2,7 @@ FROM python:3.9
 
 LABEL maintainer="Yegane Amirjani yeganeh.a.m7979@gmail.com"
 
-EXPOSE 5000
+EXPOSE 18080
 
 WORKDIR /app
 

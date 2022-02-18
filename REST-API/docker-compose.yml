@@ -6,7 +6,7 @@ services:
     links:
       - db
     ports:
-      - "5000:5000"
+      - "18080:18080"
     restart: unless-stopped
   db:
     container_name: mysql
