@@ -6,6 +6,17 @@ You can save your contacts, change the contact number you want, delete that cont
 
 We also use Swagger to document Api for convenience And that's it :) now you can open http://localhost:8000/apidocs to see available APIs.
 
+### Development Environment (using Docker)
+
+First you need to download [docker](https://docs.docker.com/engine/install/ubuntu/) 
+and [docker-compose](https://docs.docker.com/compose/install/).
+
+then run the following command :
+
+```
+docker-compose up
+```
+
 ### Development Environment (Without Docker)
 
 You must first set up a virtual environment :
