@@ -1,6 +1,6 @@
 {
 	"host": "127.0.0.1",
-	"port": "8000",
+	"port": "5000",
 	"routes":{
 		"user":{
 			
@@ -15,8 +15,8 @@
 		"mysql": true,
 		"username": "ArvanTestUser",
 		"password": "ArvanCloudPassword",
-		"server": "localhost",
-		"name": "phonebook"
+		"server": "db",
+		"db": "phonebook"
 		
 	}
 }

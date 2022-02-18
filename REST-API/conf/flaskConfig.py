@@ -2,18 +2,18 @@
 import json
 
 # Load config file
-with open('/home/yegane/Phonebook/REST-API/conf/config.json', mode='r') as config_file:
+with open('./conf/config.json', mode='r') as config_file:
     CONFIG = json.load(config_file)
 
 # Database connection
 database_username = CONFIG.get('database', {}).get('username')
 database_password = CONFIG.get('database', {}).get('password')
-database_server = CONFIG.get('database', {}).get('server')
-database_name = CONFIG.get('database', {}).get('name')
+database_server   = CONFIG.get('database', {}).get('server')
+database_db       = CONFIG.get('database', {}).get('db')
 
 # The database link to which it is connected .
 database_uri = (f'mysql+pymysql://{database_username}:{database_password}@'
-                f'{database_server}/{database_name}')
+                f'{database_server}/{database_db}')
 
 class Config :
     """ Set Flask config variables. """
