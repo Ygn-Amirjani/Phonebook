@@ -1,0 +1,24 @@
+version: '3.9'
+services:
+  app:
+    container_name: flask-rest-api
+    build: ./
+    links:
+      - db
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+  db:
+    container_name: mysql
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_ONETIME_PASSWORD: "yes"
+      MYSQL_DATABASE: "phonebook"
+      MYSQL_USER: "ArvanTestUser"
+      MYSQL_PASSWORD: "ArvanCloudPassword"
+    restart: unless-stopped
+    volumes:
+      - dbdata:/var/lib/mysql
+volumes:
+    dbdata:
