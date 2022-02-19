@@ -13,9 +13,9 @@
 	"database": {
 
 		"mysql": true,
-		"username": "ArvanTestUser",
-		"password": "ArvanCloudPassword",
-		"server": "db",
+		"username": "root",
+		"password": "123456",
+		"server": "192.168.0.14",
 		"db": "phonebook"
 		
 	}
