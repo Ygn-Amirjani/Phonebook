@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restful import Api
 from flasgger import Swagger
+import sqlalchemy, logging, sys
 
 from swaggerTemplate import template
 from models.User import User
@@ -45,7 +46,11 @@ api.add_resource(
 def create_tables() -> None :
     """ To create/use the database mentioned in the URI, run this function. """ 
     User.__table__
-    db.create_all()
+    try:
+        db.create_all()
+    except sqlalchemy.exc.OperationalError as e:
+        logging.warning(e)
+        sys.exit()
 
 if __name__ == '__main__':
     app.run(host=CONFIG.get('host'), port=CONFIG.get('port'))

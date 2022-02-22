@@ -20,14 +20,12 @@ class Select(Resource) :
         # This condition is enforced when the given username does not exist in the table 
         if  len(user_found) == 0 :
             message = make_response(
-                jsonify(msg="There is no user with this name ..."), 400
+                jsonify(msg="َUser Not Found ..."), 400
             )
         else:
-                message = make_response(
-                    jsonify(user_found), 200
-                )
+            message = make_response(
+                jsonify(user_found), 200
+            )
 
-
-        print(type(message))
         return message
 

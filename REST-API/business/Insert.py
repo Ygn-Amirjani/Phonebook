@@ -1,6 +1,7 @@
 from flask import jsonify, make_response
 from flask_restful import Resource, reqparse
 from flasgger import swag_from
+import sqlalchemy, logging
 
 from models.User import User
 from db import db
@@ -9,6 +10,8 @@ from db import db
 parser = reqparse.RequestParser(bundle_errors=True)
 parser.add_argument('phoneNumber', type=str, required=True)
 parser.add_argument('username', type=str, required=True)
+
+message = ""
 
 class Insert(Resource):
     @swag_from('../yml/insert.yml')
@@ -22,20 +25,18 @@ class Insert(Resource):
         phoneNumber = args['phoneNumber']
         username = args['username']
 
-        message = ""
-        # This condition is enforced when the given username does not exist in the table
-        if len(User.query.filter_by(phoneNumber=phoneNumber).all()) >= 1:
-            message = make_response(
-                jsonify(msg="There is a user with this phone number in this database ..."), 403
-            )
-        else:
-            # Write and save the information in the database 
-            user = User(phoneNumber=phoneNumber, username=username)
-            db.session.add(user)
+        # Write and save the information in the database 
+        user = User(phoneNumber=phoneNumber, username=username)
+        db.session.add(user)
+        try:
             db.session.commit()
-
             message = make_response(
-                jsonify(id=user.id,msg="Added New User"), 200
+                jsonify(msg="User Added ..."), 200
             )
-
+        except sqlalchemy.exc.IntegrityError as e :
+            message = make_response(
+               jsonify(msg="I could not perform the desired operation. Please check the information and try again :)"), 500
+            )
+            logging.warning(e)
+            
         return message
