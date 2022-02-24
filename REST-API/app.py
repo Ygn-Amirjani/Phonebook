@@ -49,7 +49,10 @@ def create_tables() -> None :
     try:
         db.create_all()
     except sqlalchemy.exc.OperationalError as e:
-        logging.warning(e)
+        logging.basicConfig(filename='/var/log/restapi/app.log', 
+        format='%(asctime)s - [%(levelname)s] - %(message)s',  
+        datefmt='%d-%b-%y %H:%M:%S')
+        logging.error(e)
         sys.exit()
 
 if __name__ == '__main__':

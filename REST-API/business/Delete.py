@@ -25,6 +25,9 @@ class Delete(Resource):
         phoneNumber = args['phoneNumber']
         username = args['username']
 
+        logging.basicConfig(filename='/var/log/restapi/app.log', format='%(asctime)s - [%(levelname)s] - %(message)s',  
+        datefmt='%d-%b-%y %H:%M:%S')
+        
         # remove the information in the database 
         try:
             user = User.query.filter_by(phoneNumber=phoneNumber, username=username).first()
@@ -35,8 +38,8 @@ class Delete(Resource):
             )
         except sqlalchemy.exc.InvalidRequestError as e:
             message = make_response(
-                jsonify(msg="I could not perform the desired operation. Please check the information and try again :)"), 500
+                jsonify(msg="I could not perform the desired operation. Please check the information and try again :)"), 400
             )
-            logging.warning(e)
+            logging.error(e)
 
         return message

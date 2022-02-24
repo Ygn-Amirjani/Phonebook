@@ -25,6 +25,9 @@ class Insert(Resource):
         phoneNumber = args['phoneNumber']
         username = args['username']
 
+        logging.basicConfig(filename='/var/log/restapi/app.log', format='%(asctime)s - [%(levelname)s] - %(message)s',  
+        datefmt='%d-%b-%y %H:%M:%S')
+        
         # Write and save the information in the database 
         user = User(phoneNumber=phoneNumber, username=username)
         db.session.add(user)
@@ -35,8 +38,8 @@ class Insert(Resource):
             )
         except sqlalchemy.exc.IntegrityError as e :
             message = make_response(
-               jsonify(msg="I could not perform the desired operation. Please check the information and try again :)"), 500
+               jsonify(msg="I could not perform the desired operation. Please check the information and try again :)"), 400
             )
-            logging.warning(e)
+            logging.error(e)
             
         return message

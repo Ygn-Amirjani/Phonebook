@@ -1,5 +1,5 @@
 {
-	"host": "0.0.0.0",
+	"host": "127.0.0.1",
 	"port": "18080",
 	"routes":{
 		"user":{
@@ -15,7 +15,7 @@
 		"mysql": true,
 		"username": "ArvanTestUser",
 		"password": "ArvanCloudPassword",
-		"server": "192.168.30.34",
+		"server": "192.168.1.161",
 		"db": "phonebook"
 		
 	}
