@@ -8,6 +8,9 @@ services:
     ports:
       - "18080:18080"
     restart: unless-stopped
+    volumes:
+      - /var/log/restapi:/var/log/restapi
+
   db:
     container_name: mysql
     image: mysql:8.0
