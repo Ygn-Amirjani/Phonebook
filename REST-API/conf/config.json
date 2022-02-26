@@ -13,8 +13,8 @@
 	"database": {
 
 		"mysql": true,
-		"username": "ArvanTestUser",
-		"password": "ArvanCloudPassword",
+		"username": "arvan",
+		"password": "arvan",
 		"server": "192.168.1.161",
 		"db": "phonebook"
 		
