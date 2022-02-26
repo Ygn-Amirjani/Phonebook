@@ -15,7 +15,7 @@ class Select(Resource) :
             #  We used 'for' because there may be several users with the same name 
             user = User.query.filter_by(username=username).all()[i]
             #  append users to this dictionary
-            user_found.update({f'{i}-{user.username}': user.phoneNumber})
+            user_found.update({f'{user.id}-{user.username}': user.phoneNumber})
 
         logging.basicConfig(filename='/var/log/restapi/app.log', format='%(asctime)s - [%(levelname)s] - %(message)s',  
         datefmt='%d-%b-%y %H:%M:%S')
