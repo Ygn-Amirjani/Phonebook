@@ -15,7 +15,7 @@
 		"mysql": true,
 		"username": "arvan",
 		"password": "arvan",
-		"server": "192.168.1.161",
+		"server": "192.168.1.204",
 		"db": "phonebook"
 		
 	}
