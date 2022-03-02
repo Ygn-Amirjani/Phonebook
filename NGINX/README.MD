@@ -266,6 +266,7 @@ Next, test to make sure that there are no syntax errors in any of your Nginx fil
 If there aren’t any problems, restart Nginx to enable your changes:
 * `sudo systemctl restart nginx`
 
+***
 # Wordpress (CMS)
 ## Introduction
 WordPress, one of the most popular content management systems (CMS) on the internet currently, allows users to set up flexible blogs and websites using a MySQL backend with PHP processing. WordPress has seen an incredible adoption rate among new and experienced engineers alike, and is a great choice for getting a website up and running efficiently. After an initial setup, almost all administration for WordPress websites can be done through its graphical interface these features and more make WordPress a great choice for websites built to scale.
@@ -468,6 +469,7 @@ server {
 For more information:
 [NGINX Reverse Proxy](https://www.digitalocean.com/community/tutorials/understanding-nginx-http-proxying-load-balancing-buffering-and-caching)
 
+***
 # Iptables
 # What is iptables? 
 iptables is a command line interface used to set up and maintain tables for the Netfilter firewall for IPv4, included in the Linux kernel. The firewall matches packets with rules defined in these tables and then takes the specified action on a possible match.
