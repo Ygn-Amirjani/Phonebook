@@ -13,6 +13,8 @@ Note that we must have only one default gateway in each server .
 
 The answer to your request is sent through server REST to server NGINX and as a result you can receive it .
 
+![Project outline](ProjectImage/photo5879718642797623379.jpg)
+
 ## Concepts we learned in this project 
 
 1. Work with Linux operating system
