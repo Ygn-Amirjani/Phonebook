@@ -1,19 +1,13 @@
+from ..conf.flaskConfig import CONFIG
 import json
 import random
 import string
-
-# Load config file
-with open('./conf/config.json', mode='r') as config_file:
-    CONFIG = json.load(config_file)
 
 HEADERS = {
     'Content-Type': 'application/json'
 }
 
-USER_SELECT = CONFIG.get('routes', {}).get('user', {}).get('select')
-USER_INSERT = CONFIG.get('routes', {}).get('user', {}).get('insert')
-USER_DELETE = CONFIG.get('routes', {}).get('user', {}).get('delete')
-USER_UPDATE = CONFIG.get('routes', {}).get('user', {}).get('update')
+USER_MAIN_LINK = CONFIG.get('routes', {}).get('user', {}).get('main')
 
 def make_username_random(length: int) -> str:
     random_username = ''.join(
@@ -40,7 +34,7 @@ def test_user_successfully_added(app, client):
         "phoneNumber": PHONE_NUMBER
     }
     result = client.post(
-        USER_INSERT,
+        USER_MAIN_LINK,
         data = json.dumps(data),
         headers = HEADERS
     )
@@ -55,10 +49,31 @@ def test_user_not_added_successfully(app, client):
         "phoneNumber": PHONE_NUMBER
     }
     result = client.post(
-        USER_INSERT,
+        USER_MAIN_LINK,
         data = json.dumps(data),
         headers = HEADERS
     )
 
     assert result.status_code == 400
 
+# def test_user_successfully_updated(app, client):
+
+def test_user_found_successfully(client):
+    """ Test the Select class to see if there is a user """
+
+    result = client.get(
+        f'{USER_MAIN_LINK}/{USERNAME}',
+        headers = HEADERS
+    )
+
+    assert result.status_code == 200
+
+def test_failed_find_user(client):
+    """ Test the Select class to see if there is a user """
+
+    resutl = client.get(
+        f'{USER_MAIN_LINK}/YEGANE',
+        headers = HEADERS
+    )
+
+    assert resutl.status_code == 404
