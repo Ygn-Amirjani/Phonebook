@@ -123,3 +123,33 @@ def test_failed_find_user(client):
     )
 
     assert resutl.status_code == 404
+
+def test_user_successfully_deleted(app, client):
+    """ Test the delete class to see if a user is deleted """
+
+    data = {
+        "username": USERNAME,
+        "phoneNumber": PHONE_NUMBER
+    }
+    result = client.delete(
+        USER_MAIN_LINK,
+        data = json.dumps(data),
+        headers = HEADERS
+    )
+
+    assert result.status_code == 200
+
+def test_user_not_deleted_successfully(app, client):
+    """ Test the delete class to see if a user is deleted """
+
+    data = {
+        "username": USERNAME,
+        "phoneNumber": PHONE_NUMBER
+    }
+    result = client.post(
+        USER_MAIN_LINK,
+        data = json.dumps(data),
+        headers = HEADERS
+    )
+
+    assert result.status_code == 400
