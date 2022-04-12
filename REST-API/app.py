@@ -31,11 +31,11 @@ api.add_resource(
 )
 api.add_resource(
     Insert,
-    CONFIG.get('routes', {}).get('user', {}).get('insert')
+    CONFIG.get('routes', {}).get('user', {}).get('main')
 )
 api.add_resource(
     Delete,
-    CONFIG.get('routes', {}).get('user', {}).get('delete')
+    CONFIG.get('routes', {}).get('user', {}).get('main')
 )
 api.add_resource(
     Update,
