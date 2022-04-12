@@ -8,6 +8,9 @@ HEADERS = {
 }
 
 USER_MAIN_LINK = CONFIG.get('routes', {}).get('user', {}).get('main')
+USERNAME_SELECT_FAIL = ""
+NEW_PHONE_NUMBER = ""
+PHONE_NUMBER_NOT_FOR_USER = ""
 
 def make_username_random(length: int) -> str:
     random_username = ''.join(
@@ -56,7 +59,50 @@ def test_user_not_added_successfully(app, client):
 
     assert result.status_code == 400
 
-# def test_user_successfully_updated(app, client):
+def test_user_successfully_updated(app, client):
+    """ Test the update class to see if the phone number has been updated """
+
+    data = {
+        "username": USERNAME,
+        "phoneNumber": PHONE_NUMBER
+    }
+    result = client.patch(
+        f'{USER_MAIN_LINK}/{NEW_PHONE_NUMBER}',
+        data = json.dumps(data),
+        headers = HEADERS
+    )
+
+    assert result.status_code == 200
+
+def test_there_is_no_user_with_this_phoneNumber(app, client):
+    """ Test the update class to see if the missing phone number has been updated """
+
+    data = {
+        "username": USERNAME,
+        "phoneNumber": PHONE_NUMBER_NOT_FOR_USER
+    }
+    result = client.patch(
+        f'{USER_MAIN_LINK}/{NEW_PHONE_NUMBER}',
+        data = json.dumps(data),
+        headers = HEADERS
+    )
+
+    assert result.status_code == 400
+
+def test_phone_numbers_are_same(app, client):
+    """ Test the update class to see if the duplicate phone number is updated """
+
+    data = {
+        "username": USERNAME,
+        "phoneNumber": PHONE_NUMBER
+    }
+    result = client.patch(
+        f'{USER_MAIN_LINK}/{PHONE_NUMBER}',
+        data = json.dumps(data),
+        headers = HEADERS
+    )
+
+    assert result.status_code == 400
 
 def test_user_found_successfully(client):
     """ Test the Select class to see if there is a user """
@@ -72,7 +118,7 @@ def test_failed_find_user(client):
     """ Test the Select class to see if there is a user """
 
     resutl = client.get(
-        f'{USER_MAIN_LINK}/YEGANE',
+        f'{USER_MAIN_LINK}/{USERNAME_SELECT_FAIL}',
         headers = HEADERS
     )
 
