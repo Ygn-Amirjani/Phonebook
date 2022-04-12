@@ -31,3 +31,34 @@ def make_phoneNumber_random(length: int) -> str:
 
 USERNAME = make_username_random(10)
 PHONE_NUMBER = f'989{make_phoneNumber_random(8)}'
+
+def test_user_successfully_added(app, client):
+    """ Test the insert class to see if a new user is added """
+
+    data = {
+        "username": USERNAME,
+        "phoneNumber": PHONE_NUMBER
+    }
+    result = client.post(
+        USER_INSERT,
+        data = json.dumps(data),
+        headers = HEADERS
+    )
+
+    assert result.status_code == 200
+
+def test_user_not_added_successfully(app, client):
+    """ Test the insert class to see if a duplicate user is added """
+
+    data = {
+        "username": USERNAME,
+        "phoneNumber": PHONE_NUMBER
+    }
+    result = client.post(
+        USER_INSERT,
+        data = json.dumps(data),
+        headers = HEADERS
+    )
+
+    assert result.status_code == 400
+
