@@ -4,3 +4,4 @@ flask_sqlalchemy
 pymysql
 flasgger
 cryptography
+pytest
