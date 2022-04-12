@@ -5,7 +5,7 @@
 		"user":{
 			"main": "/user",
 			"select":"/user/<string:username>",
-			"update":"/user/<string:phoneNumber>"
+			"update":"/user/<string:phone_number>"
 		}
 	},
 	"database": {
