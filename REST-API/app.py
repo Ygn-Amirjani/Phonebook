@@ -2,16 +2,21 @@ from flask import Flask
 from flask_restful import Api
 from flasgger import Swagger
 import sqlalchemy, logging, sys
+import json
 
 from swaggerTemplate import template
 from models.User import User
-from conf.flaskConfig import Config, CONFIG
+from conf.flaskConfig import Config
 from business.Select import Select
 from business.Insert import Insert
 from business.Delete import Delete
 from business.Update import Update
 
 from db import db
+
+# Load config file
+with open('conf/config.json', mode='r') as config_file:
+    CONFIG = json.load(config_file)
 
 # Construct the core application.
 app = Flask(__name__)
