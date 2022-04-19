@@ -1,5 +1,4 @@
-from conf.flaskConfig import CONFIG
-from app import app as flask_app
+from app import CONFIG, app as flask_app
 import random
 import string
 import pytest
@@ -10,9 +9,9 @@ HEADERS = {
 }
 
 USER_MAIN_LINK = CONFIG.get('routes', {}).get('user', {}).get('main')
-USERNAME_SELECT_FAIL = "YEGANE"
-NEW_PHONE_NUMBER = "989100043286"
-PHONE_NUMBER_NOT_FOR_USER = "989924776653"
+USERNAME_SELECT_FAIL = "Anonymous"
+NEW_PHONE_NUMBER = "989100000000"
+PHONE_NUMBER_NOT_FOR_USER = "989922222222"
 
 def make_username_random(length: int) -> str:
     random_username = ''.join(
