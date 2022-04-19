@@ -1,15 +1,11 @@
 """ Flask configuration. """
-import json
-
-# Load config file
-with open('./conf/config.json', mode='r') as config_file:
-    CONFIG = json.load(config_file)
+import os
 
 # Database connection
-database_username = CONFIG.get('database', {}).get('username')
-database_password = CONFIG.get('database', {}).get('password')
-database_server   = CONFIG.get('database', {}).get('server')
-database_db       = CONFIG.get('database', {}).get('db')
+database_username = os.environ.get("DATABASE_USERNAME")
+database_password = os.environ.get("DATABASE_PASSWORD")
+database_server   = os.environ.get("DATABASE_SERVER")
+database_db       = os.environ.get("DATABASE_DB")
 
 # The database link to which it is connected .
 database_uri = (f'mysql+pymysql://{database_username}:{database_password}@'
