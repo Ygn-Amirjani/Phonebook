@@ -3,7 +3,7 @@ Give a new phone number and change the user's phone number with the ID and usern
 tags: 
   - name: "User"
 parameters:
-  - name: phoneNumber
+  - name: phone_number
     in: path
     required: true
     type: "string"
@@ -13,17 +13,17 @@ parameters:
     required: true
     schema:
     required:
-      - id
+      - phoneNumber
       - username
     properties:
-      id:
-        type: int
-        description: "Because the ID is primary key"
+      phoneNumber:
+        type: string
+        description: "Because the phoneNumber is primary key"
       username:
         type: string
         description: Your name
     example:
-      id: 1
+      phoneNumber: "989124128795"
       username: "Yegane"
 responses:
   "200":
